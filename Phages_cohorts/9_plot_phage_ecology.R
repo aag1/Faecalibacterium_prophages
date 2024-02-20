@@ -77,52 +77,9 @@ legend(
 
 
 # ------------------------------ panel B ------------------------------ #
-DF <- data.frame(NULL)
+DF <- read.table('LLD_IBD_phages_logistic_regression.txt', sep = '\t', header = T, row.names = 1, stringsAsFactors = F)
 
-for (K in c('LLD', 'IBD')) {
-
-    ### phages
-    t <- read.table(paste0(K, '_five_phages_cov.txt'), sep = '\t', header = T, row.names = 1, stringsAsFactors = F)
-
-    df <- data.frame(
-        V1 = apply(t, 2, function (v) sum(v >= 0.75)),
-        V2 = nrow(t),
-        stringsAsFactors = F
-    )
-
-
-    ### host
-    t <- read.table(paste0(K, '_metaphlan.txt'), sep = '\t', header = T, row.names = 1, stringsAsFactors = F)
-
-    i <- grep('\\|g__Faecalibacterium$', rownames(t))
-
-    df <- rbind(df, data.frame(V1 = sum(t[i, ] > 0), V2 = ncol(t), row.names = 'g__Faecalibacterium', stringsAsFactors = F))
-
-
-    ### table
-    colnames(df) <- paste0(K, c('_pos', '_all'))
-
-    if (ncol(DF) == 0) { DF <- df } else { DF <- cbind(DF, df) }
-
-}
-
-
-DF$pval <- sapply(1:nrow(DF), function (i) {
-
-    prop.test(
-        x = unlist(DF[i, c('LLD_pos', 'IBD_pos')]),
-        n = unlist(DF[i, c('LLD_all', 'IBD_all')])
-    )$p.value
-
-})
-
-DF$adj_pval <- p.adjust(DF$pval, method = 'BH')
-
-
-write.table(DF, sep = '\t', quote = F, file = 'LLD_IBD_phage_host_prevalence.txt')
-
-
-DF$stars <- sapply(DF$adj_pval, function (x) {
+DF$stars <- sapply(DF$P_adj, function (x) {
 
     stars <- ''
     if (x < 0.05) { stars <- '*' }
@@ -132,14 +89,10 @@ DF$stars <- sapply(DF$adj_pval, function (x) {
 
 })
 
+DF$LLD_pos <- DF$LLD_pos * 100
+DF$IBD_pos <- DF$IBD_pos * 100
 
-
-DF$LLD_pos_pct <- DF$LLD_pos / DF$LLD_all * 100
-
-DF$IBD_pos_pct <- DF$IBD_pos / DF$IBD_all * 100
-
-M <- as.matrix(t(DF[c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie'), c('LLD_pos_pct', 'IBD_pos_pct')]))
-
+M <- as.matrix(t(DF[c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie'), c('LLD_pos', 'IBD_pos')]))
 
 
 par(mar = c(3, 8, 2, 1), las = 1)
@@ -152,8 +105,8 @@ bp <- barplot(
     ylab = 'Positive samples, %'
 )
 
-
 for (i in c(1:2, 4:5)) { lines(x = bp[, i], y = rep(max(M[, i]) + 2, 2), xpd = T) }
+
 text(DF$stars[1:5], x = apply(bp, 2, sum) / 2, y = apply(M, 2, max) + 4, cex = 1.5, xpd = T)
 
 
@@ -173,7 +126,7 @@ mtext(c('A', 'B'), side = 2, line = c(26, 4), at = par()$usr[4], cex = 2)
 
 
 # ------------------------------ panel C ------------------------------ #
-M <- as.matrix(t(DF['g__Faecalibacterium', c('LLD_pos_pct', 'IBD_pos_pct')]))
+M <- as.matrix(t(DF['Host', c('LLD_pos', 'IBD_pos')]))
 
 
 bp <- barplot(
@@ -185,10 +138,9 @@ bp <- barplot(
     ylab = 'Positive samples, %'
 )
 
-
 lines(x = bp, y = rep(max(M) + 5, 2), xpd = T)
-text(DF$stars[6], x = apply(bp, 2, sum) / 2, y = apply(M, 2, max) + 10, cex = 1.5, xpd = T)
 
+text(DF$stars[6], x = apply(bp, 2, sum) / 2, y = apply(M, 2, max) + 10, cex = 1.5, xpd = T)
 
 mtext(
     'Faecalibacterium',

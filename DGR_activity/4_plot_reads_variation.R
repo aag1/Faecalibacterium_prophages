@@ -174,7 +174,7 @@ par(new = T, mar = c(0, 0, 0, 1))
 plot(NA, xlim = 0:1, ylim = 0:1, axes = F, ann = F)
 legend(
     'topright',
-    legend = c('Original bacterial DNA', 'Bacterial DNA, no treatment', 'VLP DNA, no treatment', 'VLP DNA, 40 °C treatment', 'VLP DNA, MMC treatment'),
+    legend = c('Bacterial genome sequencing', 'Bacterial DNA, no treatment', 'VLP DNA, no treatment', 'VLP DNA, 40 °C treatment', 'VLP DNA, MMC treatment'),
     col = c('gray25', 'cornflowerblue', 'firebrick3', 'goldenrod1', 'blueviolet'),
     lty = 1, lwd = 1.5,
     ncol = 1,
@@ -262,7 +262,7 @@ par(new = T, mar = c(3, 0, 0, 1))
 plot(NA, xlim = 0:1, ylim = 0:1, axes = F, ann = F)
 legend(
     'bottomright',
-    legend = c('Original bacterial DNA', 'Bacterial DNA, no treatment'),
+    legend = c('Bacterial genome sequencing', 'Bacterial DNA, no treatment'),
     col = c('gray25', 'cornflowerblue'),
     lty = 1, lwd = 1.5,
     ncol = 1,

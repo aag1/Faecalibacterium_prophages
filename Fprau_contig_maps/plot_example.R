@@ -139,7 +139,7 @@ legend(
     cex = 0.75
 )
 
-mtext(paste0(sub('_S[0-9]+$', '', STRAIN_ID), '  ', CONTIG_ID_short, ', kb'), side = 1, line = 2.75, at = max(Xaxis) / 2, cex = 0.9)
+mtext(paste0(sub('_S[0-9]+$', '', STRAIN_ID), ' contig ', CONTIG_ID_short, ', kb'), side = 1, line = 2.75, at = max(Xaxis) / 2, cex = 0.9)
 
 mtext('F', side = 2, line = 5, at = par()$usr[4], cex = 1.5)
 

@@ -69,7 +69,9 @@ for (STRAIN_ID in names(B)) {
         ann = F
     )
 
-    mtext(sub('_S[0-9]+$', '', STRAIN_ID), side = 3, line = 0.25, at = 0, adj = 0, font = 2, cex = 0.75)
+    SI <- sub('_S[0-9]+$', '', STRAIN_ID)
+    if (SI == 'FM7') { SI <- 'A2-165' }
+    mtext(SI, side = 3, line = 0.25, at = 0, adj = 0, font = 2, cex = 0.75)
 
     axis(side = 2, las = 1, mgp = c(3, 0.5, 0), tck = -0.05, cex.axis = 0.75)
 

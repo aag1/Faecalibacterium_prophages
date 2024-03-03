@@ -137,7 +137,9 @@ for (STRAIN_ID in unique(DF$strain_id)) {
             'topright', inset = c(-0.01, -0.15), xpd = T
         )
 
-        mtext(paste0(sub('_S[0-9]+$', '', STRAIN_ID), ' contig ', CONTIG_ID_short, ', kb'), side = 1, line = 3, at = max(Xaxis) / 2)
+        SI <- sub('_S[0-9]+$', '', STRAIN_ID)
+        if (SI == 'FM7') { SI <- 'A2-165' }
+        mtext(paste0(SI, ' contig ', CONTIG_ID_short, ', kb'), side = 1, line = 3, at = max(Xaxis) / 2)
 
     }
 

@@ -60,18 +60,17 @@ hosts <- sub('^s__Faecalibacterium', 'F.', hosts)
 hosts <- gsub('_', ' ', hosts)
 text(labels = hosts, x = -0.5, y = seq_along(hosts) - 0.5, adj = 1, xpd = T)
 
+phages[phages == 'Tulp'] <- 'Mushu'
 text(labels = phages, x = seq_along(phages) - 0.5, y = -0.6, srt = 90, adj = 0, xpd = T)
 
 
-legend(
-    x = -2.4, y = 6.7,
-    c('Discovery', 'Infection', 'CRISPR'),
-    pch = c(15, 4, 16),
-    pt.cex = c(3, 1.5, 1.5),
-    col = c('grey75', 'black', 'black'),
-    ncol = 3,
-    xpd = T
-)
+points(x = -2.75, y = 7.5, pch = 15, col = 'grey75', cex = 3, xpd = T)
+text('Detection', x = -2.25, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+points(x = -0.25, y = 7.5, pch = 4, cex = 1.5, xpd = T)
+text('Detection UHGG', x = 0, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+points(x = 2.75, y = 7.5, pch = 16, cex = 1.5, xpd = T)
+text('CRISPR UHGG', x = 3, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+rect(xleft = -3.25, xright = 5.25, ybottom = 8.25, ytop = 6.75, xpd = T)
 
 
 
@@ -93,6 +92,7 @@ DF$LLD_pos <- DF$LLD_pos * 100
 DF$IBD_pos <- DF$IBD_pos * 100
 
 M <- as.matrix(t(DF[c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie'), c('LLD_pos', 'IBD_pos')]))
+colnames(M)[colnames(M) == 'Tulp'] <- 'Mushu'
 
 
 par(mar = c(3, 8, 2, 1), las = 1)

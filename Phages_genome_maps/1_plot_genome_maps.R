@@ -16,7 +16,7 @@ D <- read.table('../Phages_proteomes/detected_domains_info.txt', sep = '\t', hea
 
 pdf('phages_genome_maps.pdf', height = 6.5, width = 7.5)
 
-par(mar = c(0.1, 4.5, 0.1, 1))
+par(mar = c(0.1, 6.5, 0.1, 1))
 
 Xmax <- 55000
 Ymax <- 16 * 7
@@ -60,6 +60,9 @@ for (p in c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie', 'CP2', 'CP11')) {
 
     save(lab, len, tab, dom, dgr, COL, file = paste0(p, '_genome_map.RData'))
 
+
+    if (lab == 'Tulp') { lab <- 'Mushu' }
+    if (lab == 'CP2') { lab <- 'Lagaffe_CP' }
 
     plot_genome_map(
         lab,

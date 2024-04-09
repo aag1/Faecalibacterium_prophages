@@ -83,7 +83,7 @@ for (x in c('Roos', 'CP2', 'CP11')) {
 
 
     # ------------------------------ panel A ------------------------------ #
-    par(mar = c(0.1, 6.5, 2, 1), mgp = c(3.2, 1.2, 0.2))
+    par(mar = c(0.1, 7.5, 2, 1), mgp = c(3.2, 1.2, 0.2))
 
     yMax <- max(w_diverg)
     yMax <- ceiling(yMax / 0.2) * 0.2
@@ -149,7 +149,7 @@ for (x in c('Roos', 'CP2', 'CP11')) {
 
 
     # ------------------------------ panel C ------------------------------ #
-    par(mar = c(3, 6.5, 2, 1))
+    par(mar = c(3, 7.5, 2, 1))
 
     plot(
         NA,
@@ -173,6 +173,7 @@ for (x in c('Roos', 'CP2', 'CP11')) {
 
     }
 
+    if (lab == 'CP2') { lab <- 'Lagaffe_CP' }
     plot_genome_map(lab, len, tab, dom, dgr, dom_lab = F, dgr_col = COL['RT'], yBottom = 0)
 
 }

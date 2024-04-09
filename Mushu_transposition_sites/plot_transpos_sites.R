@@ -9,7 +9,7 @@ b <- b[b[, 2] > 50000, ]
 
 
 
-pdf('Tulp_transpos_sites.pdf', height = 5, width = 7.5)
+pdf('Mushu_transpos_sites.pdf', height = 5, width = 7.5)
 
 layout(matrix(c(1, 2, 3, 3), nrow = 2, byrow = T), height = c(3.5, 2), width = c(3.25, 2))
 
@@ -63,7 +63,7 @@ plot(
     xlim = c(0, sum(b[, 2])),
     ylim = c(0, 12),
     xlab = '',
-    ylab = 'Tulp transposition sites',
+    ylab = 'Mushu transposition sites',
     xaxs = 'i',
     yaxs = 'i',
     bty = 'n',

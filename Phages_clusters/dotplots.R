@@ -12,6 +12,7 @@ CPS <- paste0('CP', c(2, 4, 5, 6, 7, 11))
 
 
 tab <- read.table('pairwise_identity.txt', sep = '\t', header = F, stringsAsFactors = F)
+tab <- tab[-1, ]
 
 colnames(tab) <- c('seq1', 'seq2', 'match', 'length', 'ident')
 
@@ -46,7 +47,7 @@ tab$seq2_len <- sapply(tab$seq2, get_len)
 
 info <- data.frame(
     seq_id = c('NC_047911.1', 'NC_047913.1', 'NC_047914.1', 'NC_047915.1'),
-    seq_name = c('Lagaffe*', 'Mushu*', 'Taranis', 'Toutatis'),
+    seq_name = c('Lagaffe', 'Mushu', 'Taranis', 'Toutatis'),
     stringsAsFactors = F
 )
 
@@ -56,9 +57,9 @@ row.names(info) <- info$seq_id
 
 
 # ------------------------------ plot ------------------------------ #
-pdf('dotplots_VCs.pdf', height = 2, width = 7.5)
+pdf('dotplots_VCs.pdf', height = 2.5, width = 7.5)
 
-layout(matrix(1:4, nrow = 1, byrow = T))
+layout(matrix(1:3, nrow = 1, byrow = T))
 
 par(mar = c(5, 4, 1, 1))
 

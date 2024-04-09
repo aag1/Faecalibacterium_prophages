@@ -109,6 +109,7 @@ for (phage in c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie')) {
 
     plot(NA, xlim = c(0, 55000), ylim = c(0, 6), xaxs = 'i', ann = F, axes = F)
 
+    if (lab == 'Tulp') { lab <- 'Mushu' }
     plot_genome_map(lab, len, tab, dom, dgr = NULL, dom_lab = F, yBottom = 0)
 
 

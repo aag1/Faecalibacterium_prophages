@@ -29,7 +29,7 @@
 
 * __Induction_clean_reads, Induction_map_reads, Induction_assembly__ - clean, map to bacterial genomes, and assemble reads following prophage induction experiments
 
-* __Tulp_transposition_sites__ - analyze transposable phage Tulp termini and transposition sites based on BWA-MEM split reads
+* __Mushu_transposition_sites__ - analyze transposable phage Mushu termini and transposition sites based on BWA-MEM split reads
 
 * __Phages_clusters__ - cluster induced phages and CPs with known phages using vConTACT2
 

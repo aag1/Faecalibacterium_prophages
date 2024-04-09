@@ -147,6 +147,7 @@ for (x in c('Tulp', 'Roos', 'Pioen', 'Lelie')) {
 
     plot(NA, xlim = c(0, 55000), ylim = c(0, 6), xaxs = 'i', ann = F, axes = F)
 
+    if (lab == 'Tulp') { lab <- 'Mushu' }
     plot_genome_map(lab, len, tab, dom, dgr, dgr_col = COL['RT'], dom_lab = F, yBottom = 0)
 
 
@@ -209,7 +210,7 @@ for (x in c('CP2', 'CP11')) {
 
 
     # ------------------------------ plot variation ------------------------------ #
-    par(mar = c(0.5, 5, 0.1, 3))
+    par(mar = c(0.5, 7.5, 0.1, 3))
 
 
     w_center <- seq(from = 51, to = len - 50, by = 20)
@@ -231,10 +232,11 @@ for (x in c('CP2', 'CP11')) {
 
 
     # ------------------------------ plot genome map ------------------------------ #
-    par(mar = c(3, 5, 0.1, 3))
+    par(mar = c(3, 7.5, 0.1, 3))
 
     plot(NA, xlim = c(0, 55000), ylim = c(0, 6), xaxs = 'i', ann = F, axes = F)
 
+    if (lab == 'CP2') { lab <- 'Lagaffe_CP' }
     plot_genome_map(lab, len, tab, dom, dgr, dgr_col = COL['RT'], dom_lab = F, yBottom = 0)
 
 

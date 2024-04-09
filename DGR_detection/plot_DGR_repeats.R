@@ -6,7 +6,7 @@ sessionInfo()
 
 pdf('DGR_repeats_ali.pdf', height = 7, width = 7.5)
 
-par(mar = c(1, 6, 2, 1), cex.axis = 0.55, mgp = c(3, 0.5, 0), tck = -0.01, cex = 0.75)
+par(mar = c(1, 7.5, 2, 1), cex.axis = 0.55, mgp = c(3, 0.5, 0), tck = -0.01, cex = 0.75)
 
 plot(
     NA,
@@ -47,6 +47,10 @@ for (x in rev(c('Tulp', 'Roos', 'Pioen', 'Lelie', 'CP2', 'CP11'))) {
 
     A <- read.fasta(f)$ali
     A <- toupper(A)
+
+
+    rownames(A) <- sub('^Tulp', 'Mushu', rownames(A))
+    rownames(A) <- sub('^CP2', 'Lagaffe_CP', rownames(A))
 
 
     plot_msa(A, nt_col, xLeft = 0, yBottom = yBottom)

@@ -19,6 +19,8 @@ tab <- tab[, c('VR_orf', 'VR_aa1', 'VR_aa2', 'VR_aaL')]
 tab$source <- 'phage'
 
 tab$name <- sub('_([0-9]+)$', ' orf\\1', tab$VR_orf)
+tab$name <- sub('^Tulp', 'Mushu', tab$name)
+tab$name <- sub('^CP2', 'Lagaffe_CP', tab$name)
 
 
 tab1 <- data.frame(
@@ -47,7 +49,7 @@ pal <- colfunc(101)
 # ------------------------------ plot ------------------------------ #
 pdf('DGR_targets_dotplots.pdf', height = 8.75, width = 7.5)
 
-par(mar = c(5, 8, 0, 0), las = 2, tck = -0.01, cex.axis = 0.55, mgp = c(3, 0.5, 0))
+par(mar = c(7.5, 8, 0, 0), las = 2, tck = -0.01, cex.axis = 0.55, mgp = c(3, 0.5, 0))
 
 plot(
     NA,

@@ -1,11 +1,13 @@
+.libPaths(paste0(Sys.getenv('HOME'), '/SOFTWARE/R_LIB'))
+library(vioplot)
 sessionInfo()
 
 
 
 
-pdf('phage_ecology.pdf', height = 2.25, width = 7.5)
+pdf('phage_ecology.pdf', height = 2.3, width = 7.5)
 
-layout(matrix(1:3, nrow = 1, byrow = T), width = c(3.6, 4.3, 2.1))
+layout(matrix(1:4, nrow = 1, byrow = T), width = c(3.2, 3.5, 2.05, 2.1))
 
 
 
@@ -64,13 +66,13 @@ phages[phages == 'Tulp'] <- 'Mushu'
 text(labels = phages, x = seq_along(phages) - 0.5, y = -0.6, srt = 90, adj = 0, xpd = T)
 
 
-points(x = -2.75, y = 7.5, pch = 15, col = 'grey75', cex = 3, xpd = T)
-text('Detection', x = -2.25, y = 7.5, cex = 0.8, adj = 0, xpd = T)
-points(x = -0.25, y = 7.5, pch = 4, cex = 1.5, xpd = T)
-text('Detection UHGG', x = 0, y = 7.5, cex = 0.8, adj = 0, xpd = T)
-points(x = 2.75, y = 7.5, pch = 16, cex = 1.5, xpd = T)
-text('CRISPR UHGG', x = 3, y = 7.5, cex = 0.8, adj = 0, xpd = T)
-rect(xleft = -3.25, xright = 5.25, ybottom = 8.25, ytop = 6.75, xpd = T)
+points(x = -4.1, y = 7.5, pch = 15, col = 'grey75', cex = 3, xpd = T)
+text('Detection', x = -3.6, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+points(x = -1.35, y = 7.5, pch = 4, cex = 1.5, xpd = T)
+text('Detection UHGG', x = -1.1, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+points(x = 2.4, y = 7.5, pch = 16, cex = 1.5, xpd = T)
+text('CRISPR UHGG', x = 2.65, y = 7.5, cex = 0.8, adj = 0, xpd = T)
+rect(xleft = -4.6, xright = 5.6, ybottom = 8.25, ytop = 6.75, xpd = T)
 
 
 
@@ -95,15 +97,18 @@ M <- as.matrix(t(DF[c('Tulp', 'Roos', 'Pioen', 'Aster', 'Lelie'), c('LLD_pos', '
 colnames(M)[colnames(M) == 'Tulp'] <- 'Mushu'
 
 
-par(mar = c(3, 8, 2, 1), las = 1)
+par(mar = c(3.25, 8, 2, 1))
 
 
 bp <- barplot(
     height = M,
     beside = T,
     ylim = c(0, 40),
-    ylab = 'Positive samples, %'
+    ylab = 'Positive samples, %',
+    xaxt = 'n'
 )
+
+text(colnames(M), x = apply(bp, 2, mean), y = -1, srt = 90, adj = 1, xpd = T)
 
 for (i in c(1:2, 4:5)) { lines(x = bp[, i], y = rep(max(M[, i]) + 2, 2), xpd = T) }
 
@@ -118,9 +123,6 @@ legend(
     inset = c(0, -0.1),
     xpd = T
 )
-
-
-mtext(c('A', 'B'), side = 2, line = c(26, 4), at = par()$usr[4], cex = 2)
 
 
 
@@ -142,17 +144,38 @@ lines(x = bp, y = rep(max(M) + 5, 2), xpd = T)
 
 text(DF$stars[6], x = apply(bp, 2, sum) / 2, y = apply(M, 2, max) + 10, cex = 1.5, xpd = T)
 
-mtext(
-    'Faecalibacterium',
-    side = 1,
-    line = 1,
-    at = 0,
-    cex = 2/3,
-    font = 3
-)
+mtext('Faecalibacterium', side = 1, line = 1.2, at = par()$usr[2], adj = 1, cex = 2/3, font = 3)
 
 
-mtext('C', side = 2, line = 4, at = par()$usr[4], cex = 2)
+
+
+# ------------------------------ panel D ------------------------------ #
+t <- read.table('LLD_IBD_reads_phages_host.txt', sep = '\t', header = T, stringsAsFactors = F)
+
+lld_mp <- t$HostMetaphlan[t$Cohort == 'LLD']
+ibd_mp <- t$HostMetaphlan[t$Cohort == 'IBD']
+
+pval <- wilcox.test(lld_mp, ibd_mp, paired = F)$p.value
+pval
+
+stars <- ''
+if (pval < 0.05) { stars <- '*' }
+if (pval < 0.01) { stars <- '**' }
+if (pval < 0.001) { stars <- '***' }
+
+
+vioplot(lld_mp, ibd_mp, col = gray.colors(2), xaxt = 'n', ylim = c(0, 35), yaxs = 'i', frame.plot = F)
+
+lines(x = c(1.2, 1.8), y = rep(par()$usr[4] + 1.5, 2), xpd = T)
+
+text(stars, x = 1.5, y = par()$usr[4] + 3, cex = 1.5, xpd = T)
+
+mtext('Faecalibacterium', side = 1, line = 1.2, at = par()$usr[2], adj = 1, cex = 2/3, font = 3)
+
+mtext('Relative abundance, %', side = 2, line = 3, las = 0, cex = 2/3)
+
+
+mtext(c('A', 'B', 'C', 'D'), side = 2, line = c(51.25, 32, 14, 3.25), at = par()$usr[4], cex = 2)
 
 
 dev.off()

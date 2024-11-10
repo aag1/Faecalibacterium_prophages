@@ -10,7 +10,7 @@
 
 
 module purge; module load Anaconda3; module list
-source activate MetaPhlAn4; conda list
+source activate MetaPhlAn_4.1.1; conda list
 
 merge_metaphlan_tables.py \
     IBD_metaphlan/*_metaphlan.txt \

@@ -21,13 +21,13 @@ cd IBD_metaphlan
 
 
 module purge; module load Anaconda3; module list
-source activate MetaPhlAn4; conda list
+source activate MetaPhlAn_4.1.1; conda list
 
 metaphlan \
     --input_type fastq \
     ../../../IBD_reads/${SAMPLE_ID}_kneaddata_paired_1.fastq.gz,../../../IBD_reads/${SAMPLE_ID}_kneaddata_paired_2.fastq.gz \
-    --bowtie2db ../../../MetaPhlAn4_DB \
-    --index mpa_vOct22_CHOCOPhlAnSGB_202212 \
+    --bowtie2db ../../../MetaPhlAn_4.1.1_DB \
+    --index mpa_vJun23_CHOCOPhlAnSGB_202403 \
     --bowtie2out ${SAMPLE_ID}_metaphlan.bz2 \
     --output_file ${SAMPLE_ID}_metaphlan.txt \
     --nproc ${SLURM_CPUS_PER_TASK}
